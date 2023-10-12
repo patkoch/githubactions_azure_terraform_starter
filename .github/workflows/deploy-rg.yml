@@ -3,7 +3,7 @@ on: push
 name: deploy-resource-group
 
 jobs:
-  deploy-kubernetes-cluster:
+  deploy-resource-group:
     runs-on: ubuntu-latest
     steps:
       - name: Install az
@@ -36,3 +36,11 @@ jobs:
       - name: Login with Service Principal
         run: |
             az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
+      - name: Conduct Terraform init
+        run: |
+            cd githubactions_azure_terraform_starter
+            export ARM_CLIENT_ID=${{ secrets.CLIENT_ID }}
+            export ARM_CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
+            export ARM_TENANT_ID=${{ secrets.TENANT_ID }}
+            export ARM_SUBSCRIPTION_ID=${{ secrets.SUBSCRIPTION_ID }}
+            terraform init
