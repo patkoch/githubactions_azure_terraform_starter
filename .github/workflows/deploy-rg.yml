@@ -50,10 +50,13 @@ jobs:
             terraform init
       - name: Conduct Terraform fmt
         run: |
+            cd githubactions_azure_terraform_starter
             terraform fmt
       - name: Conduct Terraform validate
         run: |
+            cd githubactions_azure_terraform_starter
             terraform validate
       - name: Conduct Terraform plan
         run: |
+            cd githubactions_azure_terraform_starter
             terraform plan -out "tfplan"
