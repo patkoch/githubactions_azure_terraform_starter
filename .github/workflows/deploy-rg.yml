@@ -3,7 +3,7 @@ on: push
 name: deploy-resource-group
 
 jobs:
-  deploy-resource-group:
+  install-prerequisites:
     runs-on: ubuntu-latest
     steps:
       - name: Install az
@@ -29,7 +29,11 @@ jobs:
       - name: Verify installation of Git
         run: git --version
       - name: Get az version
-        run: az --version
+        run: az --version     
+  deploy-resource-group:
+    runs-on: ubuntu-latest
+    needs: install-prerequisites
+    steps:
       - name: Clone the repository
         run: |
             git clone https://github.com/patkoch/githubactions_azure_terraform_starter.git
