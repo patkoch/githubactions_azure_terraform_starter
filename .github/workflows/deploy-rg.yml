@@ -54,3 +54,6 @@ jobs:
       - name: Conduct Terraform validate
         run: |
             terraform validate
+      - name: Conduct Terraform plan
+        run: |
+            terraform plan -out "tfplan"
