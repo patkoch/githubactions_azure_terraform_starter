@@ -50,5 +50,4 @@ jobs:
             terraform init
       - name: Conduct Terraform validate
         run: |
-            cd githubactions_azure_terraform_starter
             terraform validate
