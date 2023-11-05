@@ -4,6 +4,10 @@ jobs:
   install-prerequisites:
     runs-on: ubuntu-latest
     steps:
+      - name: Get runner info
+        run: |
+          echo "Runner type: ${{ runner.os }}"
+          echo "Host name: $(hostname)"
       - name: Install az
         run: "sudo apt-get update\nsudo apt-get install curl \ncurl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash\n"
       - name: Install terraform
