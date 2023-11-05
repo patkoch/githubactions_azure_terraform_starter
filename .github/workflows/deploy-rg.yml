@@ -36,6 +36,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: prepare-and-validate
     steps:
+      - name : Checkout the repository
+        uses: actions/checkout@v2
+      - name: List files in the repository
+        run: ls -R
       - name: Clone the repository
         run: |
           git clone https://github.com/patkoch/githubactions_azure_terraform_starter.git
