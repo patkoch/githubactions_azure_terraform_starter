@@ -17,12 +17,6 @@ jobs:
           sudo tee /etc/apt/sources.list.d/hashicorp.list
           sudo apt update
           sudo apt-get install terraform
-      - name: Install Git
-        run: |
-          sudo apt-get update
-          sudo apt-get install git
-      - name: Verify installation of Git
-        run: git --version
       - name: Get az version
         run: az --version
   destroy-resources:
