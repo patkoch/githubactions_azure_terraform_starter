@@ -4,13 +4,6 @@ jobs:
   prepare-and-validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Get host name
-        run: |
-          echo "Host name: $(hostname)"
-      - name : Checkout the repository
-        uses: actions/checkout@v3
-      - name: List files in the repository
-        run: ls -R
       - name: Login with Service Principal
         run: |
           az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}    
@@ -18,11 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: prepare-and-validate
     steps:
-      - name: Get host name
-        run: |
-          echo "Host name: $(hostname)"
-      - name: List files in the repository
-        run: ls -R
       - name : Checkout the repository
         uses: actions/checkout@v3
       - name: List files in the repository

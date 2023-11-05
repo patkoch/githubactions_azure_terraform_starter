@@ -6,11 +6,6 @@ jobs:
     steps:
       - name : Checkout the repository
         uses: actions/checkout@v3
-      - name: List files in the repository
-        run: ls -R
-      - name: Login with Service Principal
-        run: |
-          az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
       - name: Conduct Terraform init
         run: |
           export ARM_CLIENT_ID=${{ secrets.CLIENT_ID }}
