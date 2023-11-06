@@ -1,8 +1,34 @@
 on: workflow_dispatch
 name: destroy-resource-group
 jobs:
+  prepare-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verification whether the required repository secrets have values set
+        run: |
+          if [ -z "${{ secrets.CLIENT_ID }}" ]; then
+            echo "CLIENT_ID is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.CLIENT_SECRET }}" ]; then
+            echo "CLIENT_SECRET is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.TENANT_ID }}" ]; then
+            echo "TENANT_ID is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SUBSCRIPTION_ID }}" ]; then
+            echo "SUBSCRIPTION_ID is not set"
+            exit 1
+          fi
+      - name: Login with Service Principal
+        run: |
+          echo "Logging in with Service Principal"
+          az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}    
   destroy-resources:
     runs-on: ubuntu-latest
+    needs: prepare-and-validate
     steps:
       - name : Checkout the repository
         uses: actions/checkout@v3
