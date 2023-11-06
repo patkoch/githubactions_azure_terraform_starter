@@ -38,9 +38,9 @@ jobs:
           if [ -z "$accountExists" ]
           then
             echo "Storage account does not exist"
+            exit 1
           else
             echo "Storage account exists"
-            exit 1
           fi    
   provision-resources:
     runs-on: ubuntu-latest
