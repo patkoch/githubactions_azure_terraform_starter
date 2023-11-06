@@ -30,15 +30,7 @@ jobs:
           terraform validate
       - name: Conduct Terraform plan
         run: |-
-          export ARM_CLIENT_ID=${{ secrets.CLIENT_ID }}
-          export ARM_CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
-          export ARM_TENANT_ID=${{ secrets.TENANT_ID }}
-          export ARM_SUBSCRIPTION_ID=${{ secrets.SUBSCRIPTION_ID }}
           terraform plan -out "tfplan"
       - name: Conduct Terraform apply
         run: |-
-          export ARM_CLIENT_ID=${{ secrets.CLIENT_ID }}
-          export ARM_CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
-          export ARM_TENANT_ID=${{ secrets.TENANT_ID }}
-          export ARM_SUBSCRIPTION_ID=${{ secrets.SUBSCRIPTION_ID }}
           terraform apply -auto-approve "tfplan"
