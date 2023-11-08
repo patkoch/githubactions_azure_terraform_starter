@@ -10,13 +10,13 @@ jobs:
             echo "STORAGE_ACCOUNT_NAME is not set"
             exit 1
           else
-            echo "STORAGE_ACCOUNT_NAME is set: ${{ env.STORAGE_ACCOUNT_NAME }}"
+            echo "STORAGE_ACCOUNT_NAME is set: ${{ vars.STORAGE_ACCOUNT_NAME }}"
           fi
           if [ -z "${{ vars.RESOURCE_GROUP_NAME }}" ]; then
             echo "RESOURCE_GROUP_NAME is not set"
             exit 1
           else
-            echo "RESOURCE_GROUP_NAME is set: ${{ env.RESOURCE_GROUP_NAME }}"
+            echo "RESOURCE_GROUP_NAME is set: ${{ vars.RESOURCE_GROUP_NAME }}"
           fi
 
       - name: Verification whether the required repository secrets have values set
