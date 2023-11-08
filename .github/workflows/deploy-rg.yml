@@ -4,6 +4,21 @@ jobs:
   prepare-and-validate:
     runs-on: ubuntu-latest
     steps:
+      - name: Verification whether the environment variables have values set
+        run: |
+          if [ -z "${{ env.STORAGE_ACCOUNT_NAME }}" ]; then
+            echo "STORAGE_ACCOUNT_NAME is not set"
+            exit 1
+          else
+            echo "STORAGE_ACCOUNT_NAME is set: ${{ env.STORAGE_ACCOUNT_NAME }}"
+          fi
+          if [ -z "${{ env.RESOURCE_GROUP_NAME }}" ]; then
+            echo "RESOURCE_GROUP_NAME is not set"
+            exit 1
+          else
+            echo "RESOURCE_GROUP_NAME is set: ${{ env.RESOURCE_GROUP_NAME }}"
+          fi
+
       - name: Verification whether the required repository secrets have values set
         run: |
           if [ -z "${{ secrets.CLIENT_ID }}" ]; then
@@ -30,8 +45,8 @@ jobs:
         run: |
           echo "Verifying whether storageaccount exists"
 
-          storageAccountName=${{ secrets.STORAGE_ACCOUNT_NAME }}
-          resourceGroupName=${{ secrets.RESOURCE_GROUP_NAME }}
+          storageAccountName=${{ env.STORAGE_ACCOUNT_NAME }}
+          resourceGroupName=${{ env.RESOURCE_GROUP_NAME }}
 
           accountExists=$(az storage account show --name $storageAccountName --resource-group $resourceGroupName --query "name" --output tsv 2>/dev/null)
 
